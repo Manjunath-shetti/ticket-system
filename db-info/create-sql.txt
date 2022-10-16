@@ -1,0 +1,38 @@
+************************create schema command***********************
+create schema ticketsystem; 
+use ticketsystem;
+
+************************create table user************************ 
+create table userinfo(
+id int primary key,
+name text,
+designation text,
+email text, 
+pass text
+)
+
+********************create table department************************ 
+create table department(
+id int primary key,
+name text
+)
+
+************************create table project************************ 
+create table project(
+id int primary key,
+name text,
+d_id int,
+foreign key(d_id) references department(id) 
+)
+
+************************create table tickets************************
+create table tickets(
+id int primary key,
+title text,
+body text,
+status text,
+p_id int,
+u_id int,
+foreign key(p_id) references project(id),
+foreign key(u_id) references userinfo(id)
+)
