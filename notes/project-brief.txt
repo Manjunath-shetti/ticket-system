@@ -1,0 +1,18 @@
+Technologies used :
+-Flask API
+-Web services 
+-Use of GET,POST,DELETE,PUT
+-MySQL Database 
+-AJAX Funtions 
+-MVC Architecture 
+
+Programming Langauge Used : 
+Python Programming Langauge 
+React JS 
+Database SQL Langauge
+
+Project Brief :
+It is a ticket management system. It us basically used in the organization. In an organization we have different departments 
+and each of the department has different projects and those projects has tasks for the employees. 
+To organize task we are creating ticket syste. Here you can create tickets of specific department and specific project 
+and assign them to employees and once they finish they can close the tickets.
