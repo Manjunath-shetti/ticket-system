@@ -4,6 +4,7 @@ from flask import Flask,request
 import dbconfiguration
 from service import UserOperationService
 from service import DepartmentOperationService
+from service import ProjectOperationService
 
 app = Flask(__name__)
 
@@ -63,6 +64,37 @@ def deleteDepartmentController():
 @app.route('/getalldepartment',methods=['GET'])
 def getAllDepartmentController():
     return DepartmentOperationService.getAllDepartmentFunction()
+
+#************************************PROJECT ENDPOINTS*******************************************
+#add new project
+@app.route('/addproject',methods=['POST'])
+def addProjectController():
+    deptname = request.form['name']
+    deptID = request.form['deptID']
+    return ProjectOperationService.addProjectFunction(deptID,deptname)
+
+#update a project
+@app.route('/updateproject',methods=['PUT'])
+def updateProjectController():
+    id = request.form['id']
+    projectName = request.form['name']
+    deptID = request.form['deptid']
+    return ProjectOperationService.updateProjectFunction(deptID,id,projectName)
+
+#delete a project - deleteProjectFunction
+@app.route('/deleteproject',methods=['DELETE'])
+def deleteProjectController():
+    id = request.form['id']
+    return ProjectOperationService.deleteProjectFunction(id)
+
+#get dept wise a project - deleteProjectFunction
+@app.route('/getproject',methods=['GET'])
+def getProjectController():
+    deptId = request.form['id']
+    return ProjectOperationService.getDepartmentWiseProject(deptId)
+
+#************************************TICKET ENDPOINTS*******************************************
+
 
 if __name__ == "__main__":
     app.run()
