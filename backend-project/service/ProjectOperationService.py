@@ -1,4 +1,5 @@
 from flask import jsonify
+from sqlalchemy import true
 import dbconfiguration
 import json
 
@@ -119,7 +120,9 @@ def getDepartmentWiseProject(deptId):
     
     projectInfo = cursor.fetchall()
     dbconfiguration.closeDBInstance(cursor)
-    if len(projectInfo) == 0:        
+    if len(projectInfo) == 0:
+        main_dict['status'] = True   
+        main_dict['data'] = projectList        
         main_dict['message'] = "project for given depeartment does not exist!"
         return main_dict
     

@@ -63,6 +63,14 @@ def deleteDepartmentFunction(id):
     instance = dbconfiguration.getDBInstance()
     cursor = instance.cursor()
 
+    #check if any project is associated with this deaprtment then proceed to delete the department
+    cursor.execute("select * from project where d_id = %s", (id,))
+    
+    projectInfo = cursor.fetchall()
+    if len(projectInfo) > 0:        
+        department_Dict['message'] = "Cannot delete department since project exist for given department!"
+        return department_Dict
+
     cursor.execute("select * from department where id = %s", (id,))
     
     departmentInfo = cursor.fetchall()
@@ -92,8 +100,10 @@ def getAllDepartmentFunction():
     
     departmentInfo = cursor.fetchall()
     dbconfiguration.closeDBInstance(cursor)
-    if len(departmentInfo) == 0:        
-        department_Dict['message'] = "Department does not exist!"
+    if len(departmentInfo) == 0:     
+        main_dict["status"] = True
+        main_dict["data"] = departmentList
+        main_dict['message'] = "Department does not exist!"
         return main_dict
     
     for i in range(0,len(departmentInfo)):

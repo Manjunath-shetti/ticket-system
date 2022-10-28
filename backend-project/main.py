@@ -5,10 +5,11 @@ import dbconfiguration
 from service import UserOperationService
 from service import DepartmentOperationService
 from service import ProjectOperationService
+from service import TicketOperationService
 
 app = Flask(__name__)
 
-#************************************USER ENDPOINTS*******************************************
+#************************************USER table ENDPOINTS*******************************************
 #login api 
 @app.route('/login',methods=['POST'])
 def loginController():
@@ -40,7 +41,7 @@ def deleteUserController():
     return UserOperationService.deleteUserFunction(email)
 
 
-#************************************DEPARTMENT ENDPOINTS*******************************************
+#************************************DEPARTMENT Table ENDPOINTS*******************************************
 #add new department
 @app.route('/adddepartment',methods=['POST'])
 def addDepartmentController():
@@ -65,7 +66,7 @@ def deleteDepartmentController():
 def getAllDepartmentController():
     return DepartmentOperationService.getAllDepartmentFunction()
 
-#************************************PROJECT ENDPOINTS*******************************************
+#************************************PROJECT Table ENDPOINTS*******************************************
 #add new project
 @app.route('/addproject',methods=['POST'])
 def addProjectController():
@@ -81,20 +82,51 @@ def updateProjectController():
     deptID = request.form['deptid']
     return ProjectOperationService.updateProjectFunction(deptID,id,projectName)
 
-#delete a project - deleteProjectFunction
+#delete a project
 @app.route('/deleteproject',methods=['DELETE'])
 def deleteProjectController():
     id = request.form['id']
     return ProjectOperationService.deleteProjectFunction(id)
 
-#get dept wise a project - deleteProjectFunction
+#get dept wise a project
 @app.route('/getproject',methods=['GET'])
 def getProjectController():
     deptId = request.form['id']
     return ProjectOperationService.getDepartmentWiseProject(deptId)
 
-#************************************TICKET ENDPOINTS*******************************************
+#************************************TICKET table ENDPOINTS*******************************************
 
+#add new ticket
+@app.route('/addticket',methods=['POST'])
+def addTicketController():
+    projectId = request.form['projectId']
+    userId = request.form['userId']
+    title = request.form['title']
+    body = request.form['body']
+    return TicketOperationService.addTicketFunction(projectId,userId,title,body)
+
+#update ticket - updateTicketFunction
+@app.route('/updateticket',methods=['PUT'])
+def updateTicketController():
+    projectId = request.form['projectId']
+    userId = request.form['userId']
+    ticketId = request.form['ticketId']
+    title = request.form['title']
+    body = request.form['body']
+    status = request.form['status']
+    return TicketOperationService.updateTicketFunction(projectId,userId,ticketId,title,body,status)
+
+#delete ticket - deleteTicketFunction
+@app.route('/deleteticket',methods=['DELETE'])
+def deleteTicketController():
+    ticketId = request.form['ticketId']
+    return TicketOperationService.deleteTicketFunction(ticketId)
+
+#get tickets for project id - getTicketByProjects
+@app.route('/getticketforproject',methods=['GET'])
+def getprojectWiseTicketController():
+    projectId = request.form['projectid']
+    return TicketOperationService.getTicketByProjects(projectId)
 
 if __name__ == "__main__":
     app.run()
