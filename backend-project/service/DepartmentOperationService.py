@@ -21,7 +21,7 @@ def addDepartmentFunction(name):
     id = cursor.fetchone()
     dbconfiguration.closeDBInstance(cursor)
     department_Dict['id'] = id[0]
-    department_Dict['First_Name'] = name
+    department_Dict['departmentName'] = name
     department_Dict['status'] = True
     department_Dict['message']="Success"
 

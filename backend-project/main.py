@@ -6,8 +6,10 @@ from service import UserOperationService
 from service import DepartmentOperationService
 from service import ProjectOperationService
 from service import TicketOperationService
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 #************************************USER table ENDPOINTS*******************************************
 #login api 
@@ -89,7 +91,7 @@ def deleteProjectController():
     return ProjectOperationService.deleteProjectFunction(id)
 
 #get dept wise a project
-@app.route('/getproject',methods=['GET'])
+@app.route('/getproject',methods=['POST'])
 def getProjectController():
     deptId = request.form['id']
     return ProjectOperationService.getDepartmentWiseProject(deptId)
