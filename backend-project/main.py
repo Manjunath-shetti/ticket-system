@@ -125,7 +125,7 @@ def deleteTicketController():
     return TicketOperationService.deleteTicketFunction(ticketId)
 
 #get tickets for project id - getTicketByProjects
-@app.route('/getticketforproject',methods=['GET'])
+@app.route('/getticketforproject',methods=['POST'])
 def getprojectWiseTicketController():
     projectId = request.form['projectid']
     return TicketOperationService.getTicketByProjects(projectId)

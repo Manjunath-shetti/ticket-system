@@ -4,12 +4,13 @@ import { useEffect } from 'react';
 import UserFunction from './Functions/User/User';
 import DepartmentFunction from './Functions/Department/Department';
 import ProjectFunction from './Functions/Project/Project';
+import TicketFunction from './Functions/Ticket/Ticket';
 
 function App() {
 
 
   useEffect(() => {
-    ProjectFunction.getProject(5).then((response) => {
+    TicketFunction.deleteTicket(8).then((response) => {
       if (response.status) {
         console.log(response);
       } else {
