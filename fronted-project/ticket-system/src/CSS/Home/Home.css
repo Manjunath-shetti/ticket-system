@@ -1,0 +1,48 @@
+.loader-css {
+    font-size: 6em !important;
+    padding: 10px !important;
+    color: #070707 !important
+}
+
+.full-height {
+    height: 100%;
+}
+
+.button_example {
+    float: right;
+}
+
+
+h1 {
+    text-align: center;
+}
+
+.whole-screen {
+    height: 100vh;
+}
+
+#root {
+    height: 100vh;
+}
+
+.box {
+    background: red;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.table-center {
+    text-align: center;
+}
+
+.button-css {
+    text-align: center;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}

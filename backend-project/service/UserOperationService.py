@@ -93,6 +93,36 @@ def updateUserFunction(name,designation,email):
 
     return update_Dict
 
+def getAllUser():
+    all_dict = {}
+    all_user = []
+    all_dict['status'] = False
+    all_dict['message']="Failed to login"
+
+    instance = dbconfiguration.getDBInstance()
+
+    cursor = instance.cursor()
+
+    cursor.execute("select id,name from userinfo")
+    
+    userInfo = cursor.fetchall()
+    dbconfiguration.closeDBInstance(cursor)
+
+    for i in range(0,len(userInfo)):
+        user_dict = {}
+        user_dict['id']=userInfo[i][0]
+        user_dict['name']=userInfo[i][1]
+        all_user.append(user_dict)
+
+
+    if len(all_user) > 0:
+        all_dict['data'] = all_user
+        all_dict['status'] = True
+        all_dict['message'] = "Success"
+        
+    return all_dict
+
+
 def loginFunction(email,password):
 
     login_Dict = {}

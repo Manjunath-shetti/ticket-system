@@ -4,7 +4,7 @@ import axios from 'axios';
 class DepartmentFunctionClass extends React.Component {
 
     //function to addd new department to the organizaiton
-    async addDepartment(name, designation, email, password) {
+    async addDepartment(name) {
 
         var bodyFormData = new FormData();
         bodyFormData.append('name', name);

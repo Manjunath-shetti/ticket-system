@@ -1,0 +1,15 @@
+.login-background {
+    min-height: 100vh;
+    height: 100%;
+    background-color: red;
+}
+
+.login-row-login {
+    margin: 0 !important;
+    padding: 150px !important;
+}
+
+.login-contents {
+    border-radius: 5px 5px 5px 5px;
+    text-align: center;
+}

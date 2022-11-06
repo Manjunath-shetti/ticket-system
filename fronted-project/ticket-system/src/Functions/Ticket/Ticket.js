@@ -68,6 +68,33 @@ class TicketFunctionClass extends React.Component {
         return result;
     }
 
+    //function to get all the ticket for given project
+    async getAllUser() {
+
+        const result = await axios({
+            method: 'get',
+            url: 'http://127.0.0.1:5000/getallusers',
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+        }).then(response => {
+            if (response.status === 200) {
+                return { status: true, data: response, statusCode: response.status }
+            } else {
+                return { status: false, data: response.error, statusCode: response.status }
+            }
+        }).catch(err => {
+            let statusCode = 500;
+            let statusMsg = 'CONNECTION REFUSED';
+            if (err.response) {
+                statusMsg = err.response.data.error;
+                statusCode = err.response.status;
+            }
+            return { status: false, message: statusMsg, statusCode: statusCode }
+        })
+        return result;
+    }
+
     //function to update the ticket
     async updateTicket(projectId, userId, ticketId, title, body, status) {
 

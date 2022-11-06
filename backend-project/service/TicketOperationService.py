@@ -150,7 +150,8 @@ def getTicketByProjects(projectId):
     instance = dbconfiguration.getDBInstance()
     cursor = instance.cursor()
 
-    cursor.execute("select * from tickets where p_id=%s",(projectId,))
+    #cursor.execute("select * from tickets where p_id=%s",(projectId,))
+    cursor.execute("select * from tickets t JOIN userinfo u ON t.u_id = u.id where p_id =%s",(projectId,))
     
     ticketInfo = cursor.fetchall()
     dbconfiguration.closeDBInstance(cursor)
@@ -160,6 +161,8 @@ def getTicketByProjects(projectId):
         main_dict["data"] = ticketList
         return main_dict
     
+    print(ticketInfo)
+    
     for i in range(0,len(ticketInfo)):
         ticket_Dict = {}
         ticket_Dict['id'] = ticketInfo[i][0]
@@ -167,7 +170,7 @@ def getTicketByProjects(projectId):
         ticket_Dict['body'] = ticketInfo[i][2]
         ticket_Dict['ticketstatus'] = ticketInfo[i][3]
         ticket_Dict['projectId'] = ticketInfo[i][4]
-        ticket_Dict['userId'] = ticketInfo[i][5]
+        ticket_Dict['username'] = ticketInfo[i][7]
         ticketList.append(ticket_Dict)
 
     main_dict['data'] = ticketList

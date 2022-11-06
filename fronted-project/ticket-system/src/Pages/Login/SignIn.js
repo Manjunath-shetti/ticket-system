@@ -7,40 +7,62 @@ import { Helmet } from 'react-helmet'
 import '../../CSS/LOGIN/Login.css'
 import { userRemoveData, userSetData } from "../../Redux/User/userAction";
 
-function Login() {
+function SingIn() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    dispatch(userRemoveData());
 
     const [state, setState] = useState({
+        name: '',
+        designation: '',
         email: '',
         password: '',
+        confirmpassword: '',
         loading: false,
         message: '',
     });
 
-    const { email, password, loading, message } = state;
+    const { name, designation, email, password, confirmpassword, loading, message } = state;
     const handleChange = async (e) => {
         const { name, value } = e.target;
         setState({ ...state, [name]: value });
     }
 
-    const handleSignup = (event) => {
-        navigate('/signup')
+    const handleLogin = (event) => {
+        navigate('/login')
     }
 
     const handleSubmit = (event) => {
+
         event.preventDefault();
         event.stopPropagation();
         const form = event.currentTarget;
 
-        setState({ ...state, message: 'Loggin in...', loading: true });
-        const { email, password } = state
+        setState({ ...state, message: 'Sign in...', loading: true });
+        const { name, designation, email, password, confirmpassword } = state
         try {
-            LoginFunction.loginUser(email, password).then((response) => {
+            if (name.length == 0) {
+                setState({ ...state, message: 'Name cannot be empty', loading: true });
+                return
+            }
+            if (designation.length == 0) {
+                setState({ ...state, message: 'Designation cannot be empty', loading: true });
+                return
+            }
+            if (email.length == 0) {
+                setState({ ...state, message: 'Email cannot be empty', loading: true });
+                return
+            }
+            if (password !== confirmpassword) {
+                setState({ ...state, message: 'Password did not match', loading: true });
+                return
+            }
+            if (password.length == 0) {
+                setState({ ...state, message: 'Password cannot be empty', loading: true });
+                return
+            }
+            LoginFunction.createUser(name, designation, email, password, confirmpassword).then((response) => {
                 if (response.data && response.data.data && response.data.data.status) {
-                    dispatch(userSetData(response.data.data))
-                    navigate('/home');
+                    navigate('/login');
                 } else {
                     setState({ ...state, message: response.data.data.message, loading: false })
                 }
@@ -59,7 +81,7 @@ function Login() {
     return (
         <>
             <Helmet>
-                <title>Ticket System - Login</title>
+                <title>Ticket System - Signup</title>
             </Helmet>
 
             <div className="login-background">
@@ -67,6 +89,26 @@ function Login() {
                     <div className="row full-width justify-content-center">
                         <div className="login-row-login login-contents col-10 col-md-6 col-lg-4 offset-1 offset-md-3 offset-lg-4">
                             <form onSubmit={handleSubmit} noValidate autoComplete="off">
+                                <div className="form-control">
+                                    <input className="form-control" type="text" placeholder="Name" size={40}
+                                        value={name}
+                                        name="name" required="required"
+                                        onChange={e => {
+                                            handleChange(e)
+                                        }}
+                                    />
+                                </div>
+                                <br />
+                                <div className="form-control">
+                                    <input className="form-control" type="text" placeholder="Designation" size={40}
+                                        value={designation}
+                                        name="designation" required="required"
+                                        onChange={e => {
+                                            handleChange(e)
+                                        }}
+                                    />
+                                </div>
+                                <br />
                                 <div className="form-control">
                                     <input className="form-control" type="email" placeholder="Email (user@example.com)" size={40}
                                         value={email}
@@ -87,6 +129,16 @@ function Login() {
                                     />
                                 </div>
                                 <br />
+                                <div className="form-control">
+                                    <input className="form-control" type="password" placeholder="Confirm Password" size={40}
+                                        value={confirmpassword}
+                                        name="confirmpassword" required="required"
+                                        onChange={e => {
+                                            handleChange(e)
+                                        }}
+                                    />
+                                </div>
+                                <br />
 
                                 <div>
                                     <div className="row">
@@ -97,16 +149,16 @@ function Login() {
                                     <div className="row">
                                         <div className="col-sm-12">
                                             <Button type="submit" variant="primary" size="md"
-                                                className={"btn-danger full-width float-left"}>LOGIN</Button>
+                                                className={"btn-danger full-width float-left"}>SIGN IN</Button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-                            <form onSubmit={handleSignup} noValidate autoComplete="off">
+                            <form onSubmit={handleLogin} noValidate autoComplete="off">
                                 <div className="row">
                                     <div className="col-sm-12">
                                         <Button type="submit" variant="primary" size="md"
-                                            className={"btn-danger full-width float-left"}>SIGN UP</Button>
+                                            className={"btn-danger full-width float-left"}>GO TO LOGIN</Button>
                                     </div>
                                 </div>
                             </form>
@@ -119,4 +171,4 @@ function Login() {
     )
 }
 
-export default Login;
+export default SingIn;

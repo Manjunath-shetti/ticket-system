@@ -12,6 +12,13 @@ app = Flask(__name__)
 CORS(app)
 
 #************************************USER table ENDPOINTS*******************************************
+#get all users
+#login api 
+@app.route('/getallusers',methods=['GET'])
+def getAllUserController():
+    return UserOperationService.getAllUser()
+
+
 #login api 
 @app.route('/login',methods=['POST'])
 def loginController():
