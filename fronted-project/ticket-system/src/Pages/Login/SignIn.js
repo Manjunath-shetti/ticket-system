@@ -88,6 +88,7 @@ function SingIn() {
                 <div className="container-fluid">
                     <div className="row full-width justify-content-center">
                         <div className="login-row-login login-contents col-10 col-md-6 col-lg-4 offset-1 offset-md-3 offset-lg-4">
+                            <h1>Ticket System - Signup page</h1>
                             <form onSubmit={handleSubmit} noValidate autoComplete="off">
                                 <div className="form-control">
                                     <input className="form-control" type="text" placeholder="Name" size={40}

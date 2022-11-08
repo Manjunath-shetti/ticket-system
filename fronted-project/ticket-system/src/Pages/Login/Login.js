@@ -58,6 +58,7 @@ function Login() {
 
     return (
         <>
+
             <Helmet>
                 <title>Ticket System - Login</title>
             </Helmet>
@@ -66,6 +67,7 @@ function Login() {
                 <div className="container-fluid">
                     <div className="row full-width justify-content-center">
                         <div className="login-row-login login-contents col-10 col-md-6 col-lg-4 offset-1 offset-md-3 offset-lg-4">
+                            <h1>Ticket System - Login page</h1>
                             <form onSubmit={handleSubmit} noValidate autoComplete="off">
                                 <div className="form-control">
                                     <input className="form-control" type="email" placeholder="Email (user@example.com)" size={40}
@@ -96,16 +98,15 @@ function Login() {
                                     </div>
                                     <div className="row">
                                         <div className="col-sm-12">
-                                            <Button type="submit" variant="primary" size="md"
-                                                className={"btn-danger full-width float-left"}>LOGIN</Button>
+                                            <Button type="submit" variant="primary" size="lg">LOGIN</Button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                             <form onSubmit={handleSignup} noValidate autoComplete="off">
                                 <div className="row">
-                                    <div className="col-sm-12">
-                                        <Button type="submit" variant="primary" size="md"
+                                    <div>
+                                        <Button type="submit" variant="primary" size="lg"
                                             className={"btn-danger full-width float-left"}>SIGN UP</Button>
                                     </div>
                                 </div>
