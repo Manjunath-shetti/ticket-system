@@ -1,4 +1,4 @@
-__auther__ = 'Manjunath Shetty'
+__author__ = 'Manjunath Shetti'
 
 from flask import Flask,request
 import dbconfiguration
